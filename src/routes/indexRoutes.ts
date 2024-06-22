@@ -3,12 +3,12 @@ import { Router } from 'express';
 
 const routes = Router();
 
-routes.get('/', ( res: Response) => {
+routes.get('/', ( req: Request,res: Response) => {
     console.log('received data on master path');
 
     res.send('Api response');
 });
-routes.get('/status', ( res: Response) => {
+routes.get('/status', ( req: Request,res: Response) => {
     console.log('received data ');
 
     res.send('Active');
