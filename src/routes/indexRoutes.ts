@@ -4,9 +4,13 @@ import { Router } from 'express';
 const routes = Router();
 
 routes.get('/', ( res: Response) => {
+    console.log('received data on master path');
+
     res.send('Api response');
 });
 routes.get('/status', ( res: Response) => {
+    console.log('received data ');
+
     res.send('Active');
 });
 routes.post('/postData', (req: Request, res: Response) => {
