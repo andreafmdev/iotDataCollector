@@ -1,8 +1,9 @@
 import { Request, Response } from 'express';
 import { Router } from 'express';
+import rawDataRoutes from './rawDataRoutes';
+
 
 const routes = Router();
-
 routes.get('/', ( req: Request,res: Response) => {
     console.log('received data on master path');
 
@@ -18,5 +19,7 @@ routes.post('/postData', (req: Request, res: Response) => {
     res.send(req.body);
 
 });
+//Raw DATA ROUTES
 
+routes.use('/rawdata',rawDataRoutes);
 export default routes;

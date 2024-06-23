@@ -1,0 +1,188 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "API Title",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api"
+    }
+  ],
+  "paths": {
+    "/rawdata": {
+      "post": {
+        "summary": "Create a new RawData",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RawData"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "RawData created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RawData"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get all RawData",
+        "responses": {
+          "200": {
+            "description": "A list of RawData",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RawData"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/rawdata/{id}": {
+      "get": {
+        "summary": "Get RawData by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A single RawData",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RawData"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "RawData not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update RawData by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RawData"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "RawData updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RawData"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "RawData not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete RawData by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "RawData deleted successfully"
+          },
+          "404": {
+            "description": "RawData not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "RawData": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "60d0fe4f5311236168a109ca"
+          },
+          "value": {
+            "type": "string",
+            "example": "some value"
+          },
+          "desc": {
+            "type": "string",
+            "example": "some description"
+          },
+          "type": {
+            "type": "string",
+            "example": "some type"
+          }
+        }
+      }
+    }
+  }
+}
