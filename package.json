@@ -5,7 +5,9 @@
   "scripts": {
     "build": "npx tsc",
     "start": "node dist/index.js",
-    "dev": "nodemon src/index.ts"
+    "dev": "nodemon src/index.ts",
+    "start_dev": "pm2 start ecosystem.config.cjs --env development",
+  "start_prod": "pm2 start ecosystem.config.cjs --env production"
   },
   "keywords": [],
   "author": "",
