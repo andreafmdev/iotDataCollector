@@ -1,11 +1,15 @@
 import express, { Express} from 'express';
 import dotenv from 'dotenv';
 import helmet from 'helmet';
-import routes from './routes/indexRoutes'; // Importa il router definito
+import routes from './routes/indexRoutes';
 
 dotenv.config();
-import connectDB from './config/db/mongo'; // Importa la funzione di connessione a MongoDB
-connectDB();
+//DB IMPORT
+import {mongoDbConnection,postgreDbConnection} from './config/db/dbHandler'; // Importa la funzione di connessione a MongoDB
+mongoDbConnection.connectDB();
+postgreDbConnection.connectDB();
+
+
 const app: Express = express();
 const port = process.env.PORT || 3000;
 // Applica helmet per la sicurezza

@@ -1,6 +1,6 @@
 # Node modules
 node_modules/
-
+ecosystem.config.cjs
 # Logs
 logs
 *.log
@@ -30,3 +30,6 @@ typings/
 
 # Ignore certs directory if it contains sensitive SSL files
 certs/
+
+
+nodemon.json
