@@ -31,5 +31,7 @@ typings/
 # Ignore certs directory if it contains sensitive SSL files
 certs/
 
-
+#ignore utils
+utils/generate-migration.ts
 nodemon.json
+src/utils/generate-migrations.ts

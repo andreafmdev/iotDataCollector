@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createRawData, getAllRawData } from '../controllers/rawDataController';
+import { createRawData, getAllRawData } from '@controllers/RawDataController';
 
 const router = Router();
 router.post('/insert', createRawData);

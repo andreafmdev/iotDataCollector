@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { Router } from 'express';
 import rawDataRoutes from './rawDataRoutes';
+import userRoutes from './userRoutes';
 
 
 const routes = Router();
@@ -22,4 +23,6 @@ routes.post('/postData', (req: Request, res: Response) => {
 //Raw DATA ROUTES
 
 routes.use('/rawdata',rawDataRoutes);
+routes.use('/user',userRoutes);
+
 export default routes;

@@ -1,25 +1,33 @@
-import { Request, Response } from 'express';
-import httpStatusCodes from '@utils/httpStatusCodes';
-import User from '@models/User';
+import { Request, Response,NextFunction  } from 'express';
+import UserService from '@services/UserService';
 
-// Crea un nuovo RawData
-
-// Crea un nuovo RawData
-export const createUser = async (req: Request, res: Response): Promise<void> => {
-    const { email, password } = req.body;
-  
+class UserController {
+  private userService:  UserService;
+//dependency injection design pattern
+  constructor(userService:  UserService) {
+    this.userService = userService;
+  }
+  /**
+   * Crea un nuovo utente.
+   * @param req - La richiesta HTTP.
+   * @param res - La risposta HTTP.
+   */
+  public async createUser(req: Request, res: Response,next: NextFunction): Promise<void> {
     try {
-      // Check if user already exists
-      const existingUser = await User.findOne({ where: { email } });
-      if (existingUser) {
-        res.status(httpStatusCodes.CONFLICT).json({ message: 'User already exists' });
-        return;
-      }
-  
-      // Create a new user
-      const user = await User.create({ email, password });
-      res.status(httpStatusCodes.CREATED).json(user);
+      const userDetails = req.body;
+      const newUser = await this.userService.createUser(userDetails);
+      res.status(201).json({
+        status: 'success',
+        data: newUser
+      });
     } catch (error) {
-      res.status(httpStatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Error creating user', error });
+      next(error);
     }
-  };
+  }
+
+  // Altri metodi possono essere aggiunti qui
+}
+
+const userService = new UserService();
+const userController = new UserController(userService);
+export default userController;

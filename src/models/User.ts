@@ -1,41 +1,80 @@
-import { DataTypes, Model, Optional } from 'sequelize';
-import sequelize from '@config/db/sequelize';
+import { Table, Column, Model, PrimaryKey, AutoIncrement, Unique, DataType, BeforeUpdate, BeforeCreate, ForeignKey, BelongsTo } from 'sequelize-typescript';
+import { Optional } from 'sequelize';
+import Role from '@models/Role';
 
 interface UserAttributes {
   id: number;
   email: string;
   password: string;
+  name: string;
+  surname: string;
+
 }
 
-interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
+export interface UserCreationAttributes extends Optional<UserAttributes, 'id'> { }
+//definizione modello 
+@Table({
+  tableName: 'users',
+  timestamps: true,
+  paranoid: true, // per il soft delete
+  underscored: true
+})
 
-class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
+class User extends Model<UserAttributes, UserCreationAttributes> {
+  @PrimaryKey
+  @AutoIncrement
+  @Column(DataType.INTEGER)
   public id!: number;
-  public email!: string;
-  public password!: string;
-}
 
-User.init(
-  {
-    id: {
-      type: DataTypes.INTEGER.UNSIGNED,
-      autoIncrement: true,
-      primaryKey: true,
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-    },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-  },
-  {
-    sequelize,
-    tableName: 'users',
+  @Unique
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+    comment: 'Email dell`utente',
+
+  })
+  public email!: string;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+    comment: 'Password dell`utente',
+
+  })
+  public password!: string;
+
+  @Column({
+    type: DataType.STRING,
+    comment: 'Nome dell`utente',
+  })
+  public name?: string;
+
+  @Column({
+    type: DataType.STRING,
+    comment: 'Cognome dell`utente',
+
+  })
+  public surname?: string;
+
+  @ForeignKey(() => Role)
+  @Column({
+    type: DataType.INTEGER,
+    comment: 'Id per join su tabella dei ruoli',
+
+  })
+  public roleId!: number;
+
+  @BelongsTo(() => Role)
+  public role!: Role;
+  //Methods
+  @BeforeUpdate
+  @BeforeCreate
+  static makeUpperCase(instance: User) {
+    // this will be called when an instance is created or updated
+    if (instance.name) instance.name = instance.name.toUpperCase();
+    if (instance.surname) instance.surname = instance.surname.toUpperCase();
+
   }
-);
+}
 
 export default User;

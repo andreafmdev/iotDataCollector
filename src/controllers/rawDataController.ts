@@ -1,4 +1,3 @@
-import { model } from 'mongoose';
 import { Request, Response } from 'express';
 import RawData, { IRawData } from '@models/RawDataModel';
 import httpStatusCodes from '@utils/httpStatusCodes';
