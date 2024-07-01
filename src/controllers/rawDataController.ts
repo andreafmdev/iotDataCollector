@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import RawData, { IRawData } from '@models/RawDataModel';
+import RawData, { IRawData } from '@models/mongoose/RawDataModel';
 import httpStatusCodes from '@utils/httpStatusCodes';
 
 // Create a new RawData

@@ -5,7 +5,7 @@ import routes from './routes/indexRoutes';
 
 dotenv.config();
 //DB IMPORT
-import {mongoDbConnection,postgreDbConnection} from './config/db/dbHandler'; // Importa la funzione di connessione a MongoDB
+import {mongoDbConnection} from './config/db/dbHandler'; // Importa la funzione di connessione a MongoDB
 
 
 
@@ -35,7 +35,6 @@ if (process.env.NODE_ENV === 'development') {
 const startServer = async () => {
   try {
     await mongoDbConnection.connectDB();
-    await postgreDbConnection.connectDB();
     
     app.listen(port, () => {
       console.log(`Server is running at http://localhost:${port}`);
