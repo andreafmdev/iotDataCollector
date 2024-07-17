@@ -8,13 +8,21 @@
     "baseUrl": "./src",
     "paths": {
       "@models/*": ["models/*"],
+      "@pgmodels/*": ["models/postgre/*"],
+      "@mongomodels/*": ["models/mongo/*"],
       "@config/*": ["config/*"],
       "@controllers/*": ["controllers/*"],
       "@routes/*": ["routes/*"],
       "@middlewares/*": ["middlewares/*"],
       "@utils/*": ["utils/*"],
       "@services/*": ["services/*"],
-      "@errors/*": ["errors/*"]
+      "@errors/*": ["errors/*"],
+      "@seeders/*": ["seeders/*"],
+      "@postgrerepositories/*": ["repositories/postgre/*"],
+      "@mongorepositories/*": ["repositories/mongo/*"],
+      "@dto/*": ["dto/*"]
+
+
     },
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
