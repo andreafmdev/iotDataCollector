@@ -1,6 +1,8 @@
-import  {UserDTO}  from '@dto/User/UserDTO';
+import  {UserDto}  from '@dto/User/UserDto';
 
 export interface IUserService {
-  getUser(id: number): Promise<UserDTO | null>;
-  getAllUser(): Promise<UserDTO[]>;
+  getUser(id: number): Promise<UserDto | null>;
+  getAllUser(): Promise<UserDto[]>;
+  saveUser(): Promise<UserDto>;
+
 }

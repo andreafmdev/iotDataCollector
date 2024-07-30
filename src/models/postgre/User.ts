@@ -1,6 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToMany, JoinTable } from 'typeorm';
 import Role from '@pgmodels/Role';
-
 @Entity('users')
 export class User {
     @PrimaryGeneratedColumn()
@@ -10,7 +9,6 @@ export class User {
         type: 'varchar',
         length: 100,
         comment: 'Nome'
-        // ...
     })
     firstName!: string;
 
@@ -18,7 +16,6 @@ export class User {
         type: 'varchar',
         length: 100,
         comment: 'Nome'
-        // ...
     })
     lastName!: string;
 
@@ -29,21 +26,34 @@ export class User {
         comment: 'Email',
         nullable: false 
 
-        // ...
     })
     email!: string;
 
     @Column({
         type: 'varchar',
-        length: 100,
+        length: 255,
         comment: 'password',
         nullable: false 
-        // ...
     })
     password!: string;
 
     @Column({ default: true })
     isActive!: boolean;
+
+    @Column({ type: 'varchar', length: 255, nullable: true })
+    verificationToken?: string ;
+
+    @Column({ type: 'timestamp', nullable: true })
+    verifiedAt?: Date;
+
+    @Column({ type: 'varchar', length: 255, nullable: true })
+    passwordResetToken?: string ;
+  
+    @Column({ type: 'timestamp', nullable: true })
+    passwordResetExpires?: Date;
+  
+    @Column({ type: 'timestamp', nullable: true })
+    lastLoginAt?: Date;
 
     @ManyToMany(() => Role, role => role.users)
     @JoinTable({
@@ -58,7 +68,9 @@ export class User {
 
     @UpdateDateColumn()
     updatedAt!: Date;
-
+    //funzioni hook
+    
+    
 }
 
 export default User;

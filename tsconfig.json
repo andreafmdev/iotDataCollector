@@ -20,7 +20,9 @@
       "@seeders/*": ["seeders/*"],
       "@postgrerepositories/*": ["repositories/postgre/*"],
       "@mongorepositories/*": ["repositories/mongo/*"],
-      "@dto/*": ["dto/*"]
+      "@dto/*": ["dto/*"],
+      "@request/*": ["request/*"]
+
 
 
     },

@@ -12,6 +12,11 @@ export class UserRepository implements IUserRepository {
     ) {
         this.userRepository = this.dataSource.getRepository(User);
     }
+
+    async save(user: User): Promise<User> {
+       return await this.userRepository.save(user);
+    }
+
     async findById(id: number): Promise<User | null> {
         const user = await this.userRepository.findOne({ where: { id:id,isActive: true } });
 
@@ -25,6 +30,11 @@ export class UserRepository implements IUserRepository {
                 roles: true,
             },
         });
+
+        return user;
+    }
+    async findByMail(email: string): Promise<User | null> {
+        const user = await this.userRepository.findOne({ where: { email:email} });
 
         return user;
     }
