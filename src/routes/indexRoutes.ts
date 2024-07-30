@@ -1,8 +1,10 @@
 import { Request, Response } from 'express';
 import { Router } from 'express';
-import rawDataRoutes from './rawDataRoutes';
-import userRoutes from './userRoutes';
+import  userRouter  from '@routes/userRoutes';
+import  authRouter  from '@routes/authRoutes';
 
+import rawDataRoutes from './rawDataRoutes';
+import '@config/container'; // Assicurati che il container venga importato
 
 const routes = Router();
 routes.get('/', ( req: Request,res: Response) => {
@@ -23,6 +25,7 @@ routes.post('/postData', (req: Request, res: Response) => {
 //Raw DATA ROUTES
 
 routes.use('/rawdata',rawDataRoutes);
-routes.use('/user',userRoutes);
+routes.use('/user',userRouter);
+routes.use('/auth',authRouter);
 
 export default routes;

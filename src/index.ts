@@ -1,3 +1,6 @@
+import 'reflect-metadata'; // Questo deve essere il primo import
+import '@config/container'; 
+
 import express, { Express} from 'express';
 import dotenv from 'dotenv';
 import helmet from 'helmet';
@@ -5,8 +8,7 @@ import routes from './routes/indexRoutes';
 
 dotenv.config();
 //DB IMPORT
-import {mongoDbConnection,postgreDbConnection} from './config/db/dbHandler'; // Importa la funzione di connessione a MongoDB
-
+import {mongoDbConnection,postgreConnection} from './config/db/dbHandler'; // Importa la funzione di connessione a MongoDB
 
 
 const app: Express = express();
@@ -35,8 +37,7 @@ if (process.env.NODE_ENV === 'development') {
 const startServer = async () => {
   try {
     await mongoDbConnection.connectDB();
-    await postgreDbConnection.connectDB();
-    
+    await postgreConnection.connectDB();
     app.listen(port, () => {
       console.log(`Server is running at http://localhost:${port}`);
     }).on('error', (error) => {

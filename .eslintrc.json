@@ -11,6 +11,14 @@
     "rules": {
       "semi": ["error", "always"],
       "quotes": ["error", "single"]
+    },"overrides": [
+    {
+      "files": ["src/migrations/**/*.ts"],
+      "rules": {
+        "quotes": ["off"],
+        "semi": ["off"]
+      }
     }
+  ]
   }
   

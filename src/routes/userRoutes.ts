@@ -1,15 +1,11 @@
 import { Router } from 'express';
-import userController from '@controllers/UserController';
-import { validateRequest } from '@middlewares/validateRequest';
-import { body } from 'express-validator';
-import { errorHandler } from '@middlewares/errorHandler';
+import { container } from 'tsyringe';
+import { UserController } from '@controllers/v1/UserController';
 
-const router = Router();
+const userRouter: Router = Router();
+const userController = container.resolve(UserController);
 
-router.post('/insert', validateRequest([
-    body('email').isEmail().withMessage('Invalid email address'),
-    body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long'),
-]), (req, res, next) => userController.createUser(req, res, next));
-router.use(errorHandler);
+userRouter.get('/user/:id', userController.getUser.bind(userController));
+userRouter.get('/users', userController.getAllUsers.bind(userController));
 
-export default router;
+export default userRouter;

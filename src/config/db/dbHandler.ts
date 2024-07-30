@@ -1,28 +1,21 @@
 import connectMongoDB from '@config/db/mongoInit';
-import pgInit from '@config/db/postgreInit'; //sequelize
-const postgreConnection = async () => {
-  try {
-    await pgInit.authenticate();
-    await init();//rimuovere in prod
-    console.log('Connection has been established successfully to PG db.');
-  } catch (error) {
-    console.error('Unable to connect to the database:', error);
-  }
-};
+import PostgresDataSource from '@config/db/typeOrm';
 
-const postgreDbConnection = {
-  connectDB: postgreConnection,
+const pgInit = () => {
+  PostgresDataSource.initialize()
+    .then(() => {
+      console.log('Data Source has been initialized!');
+    })
+    .catch((err) => {
+      console.error('Error during Data Source initialization', err);
+    });
+
+};
+const postgreConnection = {
+  connectDB: pgInit
 };
 const mongoDbConnection = {
   connectDB: connectMongoDB,
 };
 
-async function init() {
-  try {
-    await pgInit.sync({ force: true }); // `force: true` reimposta il database ad ogni avvio, rimuovi in produzione
-    console.log('Database synced');
-  } catch (error) {
-    console.error('Unable to sync database:', error);
-  }
-}
-export { postgreDbConnection, mongoDbConnection };
+export { mongoDbConnection, postgreConnection };
