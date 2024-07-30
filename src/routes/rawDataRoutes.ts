@@ -1,7 +1,11 @@
 import { Router } from 'express';
-import { createRawData, getAllRawData } from '@controllers/v1/rawDataController';
+import { container } from 'tsyringe';
+
+import { RawDataController } from '@controllers/v1/rawDataController';
 
 const router = Router();
-router.post('/insert', createRawData);
-router.get('/getAll', getAllRawData);
+const rawDataController = container.resolve(RawDataController);
+
+router.post('/insert', (req, res, next) => rawDataController.createRawData(req, res, next));
+router.get('/getAll', (req, res, next) => rawDataController.getAllRawData(req, res, next));
 export default router;

@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { injectable } from 'tsyringe';
-import { BaseController } from '../BaseController';
+import { BaseController } from '@controllers/BaseController';
 import { UserService } from '@services/UserService';
 
 @injectable()

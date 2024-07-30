@@ -21,7 +21,9 @@
       "@postgrerepositories/*": ["repositories/postgre/*"],
       "@mongorepositories/*": ["repositories/mongo/*"],
       "@dto/*": ["dto/*"],
-      "@request/*": ["request/*"]
+      "@request/*": ["request/*"],
+      "@customTypes/*": ["types/*"]
+
 
 
 

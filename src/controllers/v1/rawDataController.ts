@@ -1,26 +1,31 @@
-import { Request, Response } from 'express';
+// src/controllers/RawDataController.ts
+import { Request, Response, NextFunction } from 'express';
+import { injectable } from 'tsyringe';
 import RawData, { IRawData } from '@models/mongo/RawDataModel';
-import httpStatusCodes from '@utils/httpStatusCodes';
+import { BaseController } from '@controllers/BaseController';
 
-// Create a new RawData
-export const createRawData = async (req: Request, res: Response): Promise<void> => {
-  const { value, desc, type } = req.body;
+@injectable()
+export class RawDataController extends BaseController {
+    public async createRawData(req: Request, res: Response, next: NextFunction): Promise<void> {
+        const { value, desc, type } = req.body;
 
-  try {
-    const rawData: IRawData = new RawData({ value, desc, type });
-    const savedRawData = await rawData.save();
-    res.status(httpStatusCodes.CREATED).json(savedRawData);
-  } catch (error) {
-    res.status(httpStatusCodes.INTERNAL_SERVER_ERROR).json({ message: error instanceof Error ? error.message : 'Unknown error' });
-  }
-};
+        try {
+            const rawData: IRawData = new RawData({ value, desc, type });
+            const savedRawData = await rawData.save();
+            this.handleCreated(res, savedRawData);
+        } catch (error) {
+            this.handleError(res, error);
+            next(error);
+        }
+    }
 
-// Get all RawData
-export const getAllRawData = async (req: Request, res: Response): Promise<void> => {
-  try {
-    const rawDataList = await RawData.find();
-    res.status(httpStatusCodes.OK).json(rawDataList);
-  } catch (error) {
-    res.status(httpStatusCodes.INTERNAL_SERVER_ERROR).json({ message: error instanceof Error ? error.message : 'Unknown error' });
-  }
-};
+    public async getAllRawData(req: Request, res: Response, next: NextFunction): Promise<void> {
+        try {
+            const rawDataList = await RawData.find();
+            this.handleSuccess(res, rawDataList);
+        } catch (error) {
+            this.handleError(res, error);
+            next(error);
+        }
+    }
+}
