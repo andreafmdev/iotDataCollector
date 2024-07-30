@@ -9,7 +9,7 @@ import {hashPassword,comparePassword} from '@utils/passwordUtil';
 import { IAuthService } from '@services/IAuthService';
 import AppError from '@errors/AppError';
 //import types
-import type { UserToken } from '@customTypes/UserToken';
+import { UserToken } from '@customTypes/UserToken';
 
 
 //errors const

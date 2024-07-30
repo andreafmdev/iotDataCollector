@@ -3,7 +3,7 @@ import { Router } from 'express';
 import  userRouter  from '@routes/userRoutes';
 import  authRouter  from '@routes/authRoutes';
 
-import rawDataRoutes from './rawDataRoutes';
+import rawDataRoutes from './measureDataRoutes';
 import '@config/container'; // Assicurati che il container venga importato
 
 const routes = Router();

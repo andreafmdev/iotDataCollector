@@ -1,4 +1,4 @@
-import  {UserDto}  from '@dto/User/UserDto';
+import {UserDto}  from '@dto/User/UserDto';
 
 export interface IUserService {
   getUser(id: number): Promise<UserDto | null>;

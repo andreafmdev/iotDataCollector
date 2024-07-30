@@ -1,12 +1,12 @@
 import { Schema, Document, model } from 'mongoose';
 
-export interface IRawData extends Document {
+export interface IMeasureData extends Document {
   value: string;
   desc: string;
   type: string;
 }
 
-const rawDataSchema: Schema = new Schema({
+const measureDataSchema: Schema = new Schema({
     value: {
     type: String,
     required: true,
@@ -22,4 +22,4 @@ const rawDataSchema: Schema = new Schema({
   },
 });
 
-export default model<IRawData>('RawData', rawDataSchema);
+export default model<IMeasureData>('MeasureData', measureDataSchema);
