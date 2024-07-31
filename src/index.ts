@@ -1,4 +1,7 @@
+
 import 'reflect-metadata'; // Questo deve essere il primo import
+import 'module-alias/register';
+
 import '@config/container'; 
 
 import express, { Express} from 'express';

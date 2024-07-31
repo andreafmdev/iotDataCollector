@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, CreateDateColumn, U
 import  Role  from '@pgmodels/Role';
 
 @Entity('permissions')
-export default class Permission {
+export class Permission {
     @PrimaryGeneratedColumn()
     id!: number;
 
@@ -18,3 +18,4 @@ export default class Permission {
     @UpdateDateColumn()
     updatedAt!: Date;
 }
+export default Permission;

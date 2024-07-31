@@ -1,6 +1,7 @@
 import { DataSource } from 'typeorm';
 import dotenv from 'dotenv';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
+import path from 'path';
 
 
 dotenv.config(); // Carica le variabili d'ambiente dal file .env
@@ -11,6 +12,15 @@ console.log(`Port: ${process.env.PGPORT}`);
 console.log(`Username: ${process.env.PGUSER}`);
 console.log(`Password: ${process.env.PGPASSWORD}`);
 console.log(`Database: ${process.env.PGDATABASE}`);
+const isCompiled = path.extname(__filename) === '.js';
+
+const entitiesPath = isCompiled
+    ? path.join(__dirname, 'models', 'postgre', '*.js')
+    : path.join(__dirname, 'models', 'postgre', '*.ts');
+
+const migrationsPath = isCompiled
+    ? path.join(__dirname, 'migrations', 'postgre', '*.js')
+    : path.join(__dirname, 'migrations', 'postgre', '*.ts');
 const PostgresDataSource = new DataSource({
     type: 'postgres',
     host: process.env.PGHOST!,
@@ -18,8 +28,8 @@ const PostgresDataSource = new DataSource({
     username: process.env.PGUSER!,
     password: process.env.PGPASSWORD!,
     database: process.env.PGDATABASE!,
-    entities: ['./src/models/postgre/*.ts'],
-    migrations: ['./src/migrations/postgre/*.ts'],
+    entities: [entitiesPath],
+    migrations: [migrationsPath],
 
     namingStrategy: new SnakeNamingStrategy(),
     migrationsTableName: 'migration_system',

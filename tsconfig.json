@@ -6,6 +6,7 @@
     "outDir": "./dist",
     "moduleResolution": "node",
     "baseUrl": "./src",
+    
     "paths": {
       "@models/*": ["models/*"],
       "@pgmodels/*": ["models/postgre/*"],
@@ -23,11 +24,8 @@
       "@dto/*": ["dto/*"],
       "@request/*": ["request/*"],
       "@customTypes/*": ["types/*"]
-
-
-
-
     },
+
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "resolveJsonModule": true,
