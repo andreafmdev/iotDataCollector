@@ -12,10 +12,10 @@ import { UserService } from '@services/UserService';
 import { IAuthService } from '@services/IAuthService';
 import { AuthService } from '@services/AuthService';
 //mongo
-import { IMeasureDataRepository } from '@mongorepositories/IMeasureDataRepository';
-import { MeasureDataRepository } from '@mongorepositories/MeasureDataRepository';
-import { IMeasureDataService } from '@services/IMeasureDataService';
-import { MeasureDataService } from '@services/MeasureDataService';
+import { IMeasureRepository } from '@mongorepositories/IMeasureRepository';
+import { MeasureRepository } from '@mongorepositories/MeasureRepository';
+import { IMeasureService } from '@services/IMeasureService';
+import { MeasureService } from '@services/MeasureService';
 
 // Registration for DataSource
 container.registerInstance<DataSource>('PostgresDataSource', PostgresDataSource);
@@ -26,8 +26,8 @@ container.registerSingleton<IUserService>('UserService', UserService);
 //Registration for Auth
 container.registerSingleton<IAuthService>('AuthService', AuthService);
 //Registration for MeasureData
-container.registerSingleton<IMeasureDataRepository>('IMeasureDataRepository', MeasureDataRepository);
-container.registerSingleton<IMeasureDataService>('IMeasureDataService', MeasureDataService);
+container.registerSingleton<IMeasureRepository>('IMeasureDataRepository', MeasureRepository);
+container.registerSingleton<IMeasureService>('IMeasureDataService', MeasureService);
 
-console.log(container); //debug
+//console.log(container); //debug
 export { container };

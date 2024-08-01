@@ -1,11 +1,13 @@
 import { Router } from 'express';
 import { container } from 'tsyringe';
 
-import { MeausureDataController } from '@controllers/v1/MeausureDataController';
+import { MeausureController } from '@controllers/v1/MeausureController';
+import { authMiddleware } from '@middlewares/authMiddleware';
 
-const router = Router();
-const meausureDataController = container.resolve(MeausureDataController);
+const measureRouter = Router();
+const meausureController = container.resolve(MeausureController);
 
-router.post('/insert', (req, res, next) => meausureDataController.createMeasureData(req, res, next));
-router.get('/getAll', (req, res, next) => meausureDataController.getAllMeasureData(req, res, next));
-export default router;
+measureRouter.use(authMiddleware);
+measureRouter.post('/insert', (req, res, next) => meausureController.createMeasureData(req, res, next));
+measureRouter.get('/getAll', (req, res, next) => meausureController.getAllMeasureData(req, res, next));
+export default measureRouter;

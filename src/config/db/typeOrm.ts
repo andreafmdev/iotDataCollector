@@ -12,15 +12,15 @@ console.log(`Port: ${process.env.PGPORT}`);
 console.log(`Username: ${process.env.PGUSER}`);
 console.log(`Password: ${process.env.PGPASSWORD}`);
 console.log(`Database: ${process.env.PGDATABASE}`);
-const isCompiled = path.extname(__filename) === '.js';
+const isProduction = process.env.NODE_ENV === 'production';
 
-const entitiesPath = isCompiled
-    ? path.join(__dirname, 'models', 'postgre', '*.js')
-    : path.join(__dirname, 'models', 'postgre', '*.ts');
+const entitiesPath = isProduction
+    ? path.join(__dirname, '..', 'dist', 'models', 'postgre', '*.js')
+    : path.join(__dirname, '..', '..', 'models', 'postgre', '*.ts');
 
-const migrationsPath = isCompiled
-    ? path.join(__dirname, 'migrations', 'postgre', '*.js')
-    : path.join(__dirname, 'migrations', 'postgre', '*.ts');
+const migrationsPath = isProduction
+    ? path.join(__dirname, '..', 'dist', 'migrations', 'postgre', '*.js')
+    : path.join(__dirname, '..', '..', 'migrations', 'postgre', '*.ts');
 const PostgresDataSource = new DataSource({
     type: 'postgres',
     host: process.env.PGHOST!,

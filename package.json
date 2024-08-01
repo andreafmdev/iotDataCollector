@@ -16,24 +16,7 @@
     "migration:run": "npm run typeorm -- migration:run -d src/config/db/typeOrm.ts",
     "migration:revert": "npm run typeorm -- migration:revert -d src/config/db/typeOrm.ts"
   },
-  "_moduleAliases": {
-    "@models": "dist/models",
-    "@pgmodels": "dist/models/postgre",
-    "@mongomodels": "dist/models/mongo",
-    "@config": "dist/config",
-    "@controllers": "dist/controllers",
-    "@routes": "dist/routes",
-    "@middlewares": "dist/middlewares",
-    "@utils": "dist/utils",
-    "@services": "dist/services",
-    "@errors": "dist/errors",
-    "@seeders": "dist/seeders",
-    "@postgrerepositories": "dist/repositories/postgre",
-    "@mongorepositories": "dist/repositories/mongo",
-    "@dto": "dist/dto",
-    "@request": "dist/request",
-    "@customTypes": "dist/types"
-  },
+ 
   "keywords": [],
   "author": "",
   "license": "ISC",
