@@ -10,4 +10,6 @@ const meausureController = container.resolve(MeausureController);
 measureRouter.use(authMiddleware);
 measureRouter.post('/insert', (req, res, next) => meausureController.createMeasureData(req, res, next));
 measureRouter.get('/getAll', (req, res, next) => meausureController.getAllMeasureData(req, res, next));
+measureRouter.get('/getPaginatedMeasure', (req, res, next) => meausureController.getPaginatedMeasureData(req, res, next));
+
 export default measureRouter;

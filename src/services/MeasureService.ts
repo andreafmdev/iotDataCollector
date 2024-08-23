@@ -22,5 +22,12 @@ export class MeasureService implements IMeasureService {
     public async getAllMeasureData(): Promise<IMeasure[]> {
         return await this.measureDataRepository.findAll();
     }
+    public async getMeasureData(page: number, limit: number): Promise<{ data: IMeasure[], total: number }> {
+        const skip = (page - 1) * limit;
+        const total = await this.measureDataRepository.count(); // Numero totale di misure
+        const data = await this.measureDataRepository.findWithPagination(skip, limit); // Recupera solo i dati necessari
+
+        return { data, total };
+    }
 
 }

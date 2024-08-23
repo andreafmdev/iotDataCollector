@@ -33,4 +33,21 @@ export class MeausureController extends BaseController {
             next(error);
         }
     }
+    public async getPaginatedMeasureData(req: Request, res: Response, next: NextFunction): Promise<void> {
+        try {
+            const page = parseInt(req.query.page as string) || 1;
+            const limit = parseInt(req.query.limit as string) || 10;
+
+            const { data, total } = await this.measureService.getMeasureData(page, limit);
+
+            res.json({
+                data,
+                total,
+                currentPage: page,
+                totalPages: Math.ceil(total / limit),
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
 }

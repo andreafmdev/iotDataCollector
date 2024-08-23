@@ -14,4 +14,10 @@ export class MeasureRepository implements IMeasureRepository {
         const newMeasureData = new MeasureData(measureData);
         return await newMeasureData.save();
     }
+    public async findWithPagination(skip: number, limit: number): Promise<IMeasure[]> {
+        return await MeasureData.find().skip(skip).limit(limit).exec();
+    }
+    public async count(): Promise<number> {
+        return await MeasureData.countDocuments().exec();
+    }
 }
